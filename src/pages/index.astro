@@ -1,0 +1,154 @@
+---
+import Base from '../layouts/Base.astro';
+import {
+  meta, header, opening, experience, skills, tools, recognition,
+  selectedWork, portfolio, education, contact, socials,
+} from '../data/site';
+---
+<Base>
+<main class="page">
+
+  <!-- Header -->
+  <header class="header load-animate d0">
+    <div>
+      <h1>{header.name}</h1>
+      <p class="role" set:html={header.role} />
+      <p class="currently">{header.currently}</p>
+    </div>
+    <div class="header-actions">
+      <a class="btn" href={meta.resume} target="_blank">Resume</a>
+      <a class="btn" href={`mailto:${meta.email}`}>Contact</a>
+    </div>
+  </header>
+
+  <!-- Opening statement -->
+  <div class="opening load-animate d1">
+    <p set:html={opening.body} />
+    <div class="availability">
+      {opening.availability.map((item) => <span>{item}</span>)}
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <section class="scroll-animate">
+    <p class="section-label">Experience</p>
+    <ul class="work-list">
+      {experience.map((job) => (
+        <li class="work-entry">
+          <div>
+            <div class="name" set:html={job.name} />
+            <div class="sub" set:html={job.sub} />
+            {job.metrics && (
+              <div class="metrics">
+                {job.metrics.map(([num, label]) => <span><em>{num}</em> {label}</span>)}
+              </div>
+            )}
+          </div>
+          <div class="year" set:html={job.year} />
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Skills -->
+  <section class="scroll-animate">
+    <p class="section-label">Skills</p>
+    <ul class="skills-list">
+      {skills.map((skill) => (
+        <li class="skill-entry">
+          <div class="skill-label" set:html={skill.label} />
+          <div class="skill-detail" set:html={skill.detail} />
+        </li>
+      ))}
+      <li class="skill-entry">
+        <div class="skill-label">Tools</div>
+        <div class="tools-list">
+          {tools.map((tool) => <span set:html={tool} />)}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Recognition -->
+  <section class="scroll-animate">
+    <p class="section-label">Recognition</p>
+    <ul class="award-list">
+      {recognition.map((award) => (
+        <li class="award-entry">
+          <div>
+            <div class="award-name" set:html={award.name} />
+            <div class="award-detail" set:html={award.detail} />
+          </div>
+          <div class="award-year" set:html={award.year} />
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Selected Work -->
+  <section class="scroll-animate">
+    <p class="section-label">Selected Work</p>
+    <ul class="selected-list">
+      {selectedWork.map((work) => (
+        <li class="selected-entry">
+          <div>
+            <div class="sel-name"><a class="u-link" href={work.url} target="_blank" rel="noopener">{work.name}</a></div>
+            <div class="sel-desc">{work.desc}</div>
+          </div>
+          <div class="sel-tag">{work.tag}</div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Web Portfolio -->
+  <section class="scroll-animate">
+    <p class="section-label">Web Portfolio</p>
+    <div class="portfolio-grid">
+      {portfolio.map(([domain, tag]) => (
+        <div class="portfolio-item">
+          <img class="favicon" src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`} alt="" width="14" height="14" loading="lazy" />
+          <div class="item-text">
+            <a class="u-link" href={`https://${domain}`} target="_blank" rel="noopener">{domain}</a>
+            <span class="tag">{tag}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="scroll-animate">
+    <p class="section-label">Education</p>
+    <div class="edu-line">
+      <span><em>{education.degree}</em> &mdash; {education.school}</span>
+      <span>{education.year}</span>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="scroll-animate">
+    <p class="section-label">Contact</p>
+    <ul class="contact-list">
+      {contact.map((item) => (
+        <li class="contact-item">
+          <span class="contact-label">{item.label}</span>
+          {item.external
+            ? <a class="u-link" href={item.href} target="_blank" rel="noopener">{item.text}</a>
+            : <a class="u-link" href={item.href} target="_blank">{item.text}</a>}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Social -->
+  <div class="social-icons scroll-animate">
+    {socials.map((s) => (
+      <a class="social-link" href={s.href} target="_blank" rel="noopener" aria-label={s.label}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" set:html={s.svg} />
+      </a>
+    ))}
+  </div>
+
+</main>
+</Base>
