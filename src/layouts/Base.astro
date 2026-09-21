@@ -46,7 +46,12 @@ const ogImage = new URL(meta.socialImage, Astro.site).href;
     } catch (e) {}
   </script>
 
-  <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="2baf7111-6a80-421a-8c1b-74be40f93e64"></script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script is:inline async src="https://plausible.io/js/pa-Tr7j4ZEpddqJudOYwjIdp.js"></script>
+  <script is:inline>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
 </head>
 <body>
   <slot />
